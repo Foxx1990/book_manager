@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book List{% endblock %}
+
+{% block body %}
+    <h1>Book List</h1>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Description</th>
+                <th>Publication Year</th>
+                <th>ISBN</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in pagination.items %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.description }}</td>
+                    <td>{{ book.publicationYear }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td>
+                        <a href="{{ path('book_edit', {'id': book.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{{ path('book_delete', {'id': book.id}) }}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

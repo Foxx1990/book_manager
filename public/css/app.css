@@ -1,0 +1,13 @@
+/* public/css/app.css */
+.navigation {
+    text-align: center;
+}
+
+.navigation ul.pagination {
+    justify-content: center;
+}
+
+.navigation .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+}
