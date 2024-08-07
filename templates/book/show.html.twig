@@ -1,17 +1,28 @@
-{# templates/book/show.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}Book Details{% endblock %}
+
 {% block body %}
-    <h1>{{ book.title }}</h1>
-    <p>Author: {{ book.author }}</p>
-    <p>Description: {{ book.description }}</p>
-    <p>Year: {{ book.publicationYear }}</p>
-    <p>ISBN: {{ book.isbn }}</p>
-    <img src="{{ asset('uploads/book_images/' ~ book.coverImageName) }}" alt="Cover Image">
-    <a href="{{ path('book_edit', {'id': book.id}) }}">Edit</a>
-    <form action="{{ path('book_delete', {'id': book.id}) }}" method="post" style="display:inline;">
-        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}">
-        <button type="submit">Delete</button>
-    </form>
-    <a href="{{ path('book_list') }}">Back to list</a>
+    <div class="container mt-4">
+        <h1>Book Details</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ book.author }}</h6>
+                
+                {% if book.coverImageFilename %}
+                    <div class="mb-3">
+                        <img src="{{ asset('images/books/' ~ book.coverImageFilename) }}" alt="{{ book.title }}" class="img-fluid">
+                    </div>
+                {% endif %}
+
+                <p class="card-text"><strong>Description:</strong> {{ book.description }}</p>
+                <p class="card-text"><strong>Publication Year:</strong> {{ book.publicationYear }}</p>
+                <p class="card-text"><strong>ISBN:</strong> {{ book.isbn }}</p>
+            </div>
+        </div>
+
+        <a href="{{ path('book_list') }}" class="btn btn-secondary mt-3">Back to List</a>
+    </div>
 {% endblock %}

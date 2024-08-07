@@ -28,8 +28,12 @@ class BookController extends AbstractController
      */
     public function list(Request $request, PaginatorInterface $paginator): Response
     {
-        $queryBuilder = $this->entityManager->getRepository(Book::class)->createQueryBuilder('b');
-        
+        $searchTerm = $request->query->get('search', '');
+
+        $queryBuilder = $this->entityManager->getRepository(Book::class)->createQueryBuilder('b')
+            ->where('b.title LIKE :searchTerm OR b.author LIKE :searchTerm')
+            ->setParameter('searchTerm', '%'.$searchTerm.'%');
+
         $pagination = $paginator->paginate(
             $queryBuilder, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
@@ -38,10 +42,13 @@ class BookController extends AbstractController
 
         return $this->render('book/list.html.twig', [
             'pagination' => $pagination,
+            'searchTerm' => $searchTerm,
         ]);
     }
 
-    #[Route('/books/show/{id}', name: 'book_show')]
+     /**
+     * @Route("/book/{id}", name="book_show")
+     */
     public function show(int $id, EntityManagerInterface $em): Response
     {
         $book = $em->getRepository(Book::class)->find($id);
@@ -97,18 +104,24 @@ class BookController extends AbstractController
         ]);
     
     }
-    #[Route('/books/{id}/delete', name: 'book_delete', methods: ['POST'])]
-    public function delete(Book $book, int $id, ManagerRegistry $doctrine): Response
-    {
-        $book = $this->bookRepository->find($id);
-        $entityManager = $doctrine->getManager();
-        $entityManager->remove($book);
-        $entityManager->flush();
 
-        $this->addFlash('success', 'Book deleted successfully!');
-        
+    /**
+     * @Route("/book/{id}/delete", name="book_delete", methods={"POST"})
+     */
+    public function delete(Request $request, int $id): Response
+    {
+        // Fetch the book entity manually
+        $book = $this->entityManager->getRepository(Book::class)->find($id);
+
+        if (!$book) {
+            throw $this->createNotFoundException('The book does not exist');
+        }
+
+        if ($this->isCsrfTokenValid('delete' . $book->getId(), $request->request->get('_token'))) {
+            $this->entityManager->remove($book);
+            $this->entityManager->flush();
+        }
 
         return $this->redirectToRoute('book_list');
-    
     }
 }

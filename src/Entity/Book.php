@@ -53,7 +53,7 @@ class Book
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $coverImageName;
+    private $coverImageFilename;
 
     public function getId(): ?int
     {
@@ -119,6 +119,19 @@ class Book
 
         return $this;
     }
+ 
+    // ... getters and setters
+
+    public function getCoverImageFilename(): ?string
+    {
+        return $this->coverImageFilename;
+    }
+
+    public function setCoverImageFilename(?string $coverImageFilename): self
+    {
+        $this->coverImageFilename = $coverImageFilename;
+        return $this;
+    }
 
     public function getCoverImageFile(): ?File
     {
@@ -128,19 +141,6 @@ class Book
     public function setCoverImageFile(?File $coverImageFile = null): self
     {
         $this->coverImageFile = $coverImageFile;
-
-        return $this;
-    }
-
-    public function getCoverImageName(): ?string
-    {
-        return $this->coverImageName;
-    }
-
-    public function setCoverImageName(?string $coverImageName): self
-    {
-        $this->coverImageName = $coverImageName;
-
         return $this;
     }
 }
