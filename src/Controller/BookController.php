@@ -88,8 +88,9 @@ class BookController extends AbstractController
     
     }
     #[Route('/books/{id}/delete', name: 'book_delete', methods: ['POST'])]
-    public function delete(Request $request, Book $book, ManagerRegistry $doctrine): Response
+    public function delete(Book $book, int $id, ManagerRegistry $doctrine): Response
     {
+        $book = $this->bookRepository->find($id);
         $entityManager = $doctrine->getManager();
         $entityManager->remove($book);
         $entityManager->flush();
