@@ -4,7 +4,8 @@
 
 {% block body %}
     <h1>Book List</h1>
-    
+    <a href="{{ path('book_new') }}" class="btn btn-success mb-3">Add New Book</a>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -33,7 +34,7 @@
         </tbody>
     </table>
 
-    <div class="navigation">
+    <div class="d-flex justify-content-center">
         {{ knp_pagination_render(pagination) }}
     </div>
 {% endblock %}
