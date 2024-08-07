@@ -17,31 +17,37 @@ To aplikacja stworzona przy użyciu Symfony 6 i PHP 8.0, która umożliwia zarz�
 ```bash
 git clone //https://github.com/Foxx1990/book_manager
 cd your-repository-directory
+```bash
 2. Instalacja Wymagań
 Zainstaluj zależności projektu za pomocą Composer:
+```bash
 composer install
+```bash
 3. Konfiguracja Bazy Danych
-Skopiuj plik .env do .env.local i skonfiguruj parametry bazy danych:
-
+```bash Skopiuj plik .env do .env.local i skonfiguruj parametry bazy danych: 
 cp .env .env.local
 Edytuj .env.local, aby ustawić odpowiednie wartości dla DATABASE_URL:
-
 DATABASE_URL="mysql://username:password@127.0.0.1:3306/your_database_name"
+```bash
 4. Migracje Bazy Danych
+```bash
 Utwórz bazę danych i zastosuj migracje:
 
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
-
+```bash
 5. Załaduj Dane Testowe
 Aby załadować dane testowe, użyj poniższego polecenia:
+```bash
 php bin/console doctrine:fixtures:load
+```bash
 6. Uruchomienie Serwera
 Uruchom wbudowany serwer Symfony:
+```bash
 symfony serve
 lub, jeśli nie używasz Symfony CLI:
 php bin/console server:run
-
+```bash
 
 
 Funkcjonalności
