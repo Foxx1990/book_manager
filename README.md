@@ -18,30 +18,30 @@ To aplikacja stworzona przy użyciu Symfony 6 i PHP 8.0, która umożliwia zarz�
 git clone //https://github.com/Foxx1990/book_manager
 cd your-repository-directory
 
-2. Instalacja Wymagań
+### 2. Instalacja Wymagań
 Zainstaluj zależności projektu za pomocą Composer:
 
 composer install
 
-3. Konfiguracja Bazy Danych
-```bash Skopiuj plik .env do .env.local i skonfiguruj parametry bazy danych: 
+### 3. Konfiguracja Bazy Danych
+Skopiuj plik .env do .env.local i skonfiguruj parametry bazy danych: 
 cp .env .env.local
 Edytuj .env.local, aby ustawić odpowiednie wartości dla DATABASE_URL:
 DATABASE_URL="mysql://username:password@127.0.0.1:3306/your_database_name"
 
-4. Migracje Bazy Danych
+### 4. Migracje Bazy Danych
 
 Utwórz bazę danych i zastosuj migracje:
 
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 
-5. Załaduj Dane Testowe
+### 5. Załaduj Dane Testowe
 Aby załadować dane testowe, użyj poniższego polecenia:
 
 php bin/console doctrine:fixtures:load
 
-6. Uruchomienie Serwera
+### 6. Uruchomienie Serwera
 Uruchom wbudowany serwer Symfony:
 
 symfony serve
