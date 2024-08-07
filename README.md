@@ -34,6 +34,7 @@ DATABASE_URL="mysql://username:password@127.0.0.1:3306/your_database_name"
 Utwórz bazę danych i zastosuj migracje:
 
 php bin/console doctrine:database:create
+
 php bin/console doctrine:migrations:migrate
 
 ### 5. Załaduj Dane Testowe
