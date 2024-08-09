@@ -15,7 +15,7 @@ To aplikacja stworzona przy użyciu Symfony 6 i PHP 8.0, która umożliwia zarz�
 ### 1. Klonowanie Repozytorium
 
 
-git clone //https://github.com/Foxx1990/book_manager
+git clone [//https://github.com/Foxx1990/book_manager](https://github.com/Foxx1990/book_manager.git)
 cd your-repository-directory
 
 ### 2. Instalacja Wymagań
